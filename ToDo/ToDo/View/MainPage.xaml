@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDo.MainPage">
+	<AbsoluteLayout>
+		<ImageButton
+                AbsoluteLayout.LayoutBounds="0.95,0.95,80,80"
+                AbsoluteLayout.LayoutFlags="PositionProportional"
+                CornerRadius="40"
+			    BackgroundColor="#0073ff"
+			    Clicked="Create_Todo"
+                Source="add.png"/>
+	</AbsoluteLayout>
+</ContentPage>
