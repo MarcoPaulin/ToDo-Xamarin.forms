@@ -9,7 +9,6 @@ namespace ToDo
 		public App()
 		{
 			InitializeComponent();
-
 			MainPage = new NavigationPage(new MainPage());
 		}
 

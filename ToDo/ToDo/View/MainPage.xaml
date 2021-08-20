@@ -4,9 +4,9 @@
              x:Class="ToDo.MainPage">
 	<AbsoluteLayout>
 		<ImageButton
-                AbsoluteLayout.LayoutBounds="0.95,0.95,80,80"
+                AbsoluteLayout.LayoutBounds="0.95,0.95,60,60"
                 AbsoluteLayout.LayoutFlags="PositionProportional"
-                CornerRadius="40"
+                CornerRadius="90"
 			    BackgroundColor="#0073ff"
 			    Clicked="Create_Todo"
                 Source="add.png"/>
