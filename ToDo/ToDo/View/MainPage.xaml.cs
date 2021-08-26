@@ -16,13 +16,6 @@ namespace ToDo
 			InitializeComponent();
 		}
 
-		int count = 0;
-		void Button_Clicked(object sender, System.EventArgs e)
-		{
-			count++;
-			((Button)sender).Text = $"You clicked {count} times.";
-		}
-
 		async void Create_Todo(object sender, EventArgs e)
 		{
 			await Navigation.PushAsync(new TodoView());

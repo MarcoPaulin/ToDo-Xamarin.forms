@@ -3,6 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
 			 x:Class="ToDo.View.TodoView">
 	<AbsoluteLayout>
+		<StackLayout Margin="20">
+			<ListView x:Name="TaskView"
+				ItemsSource="{Binding tasks}">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<input:CheckBox Text="{Binding Name}" Type="Check" Color="#0073ff" BorderColor="#0073ff" IconColor="#0073ff"/>
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+		</StackLayout>
 		<ImageButton
 				AbsoluteLayout.LayoutBounds="0.95,0.95,60,60"
 				AbsoluteLayout.LayoutFlags="PositionProportional"
@@ -10,16 +22,7 @@
 				BackgroundColor="#0073ff"
 				Clicked="Create_task"
 				Source="add.png"/>
-		<StackLayout Margin="20">
-			<StackLayout Orientation="Horizontal">
-				<CheckBox IsChecked="true" Color="#0073ff" />
-				<Label  VerticalOptions="Center" Text="Lorem ipsum dolor sit amet, elit rutrum, enim hendrerit augue vitae praesent sed non, lorem aenean quis praesent pede."/>
-			</StackLayout>
-			<StackLayout Orientation="Horizontal">
-				<input:CheckBox Text="Faire la vaiselle" Type="Check" Color="#0073ff" BorderColor="#0073ff" IconColor="#0073ff"/>
-			</StackLayout>
-			<CheckBox IsChecked="true"/>
-		</StackLayout>
+		
 	</AbsoluteLayout>
 
 </ContentPage>
