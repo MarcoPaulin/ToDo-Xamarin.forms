@@ -1,10 +1,8 @@
-﻿using Plugin.InputKit.Shared.Controls;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Text.Json;
+
 using ToDo.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -14,19 +12,25 @@ namespace ToDo.View
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class TodoView : ContentPage
 	{
-		public ObservableCollection<TodoTask> tasks = new ObservableCollection<TodoTask>();
-		public TodoView()
+		public string todo_name;
+		TodoTask todo_list = new TodoTask();
+		public TodoView(string name)
 		{
 			InitializeComponent();
-			TaskView.ItemsSource = tasks;
+			todo_name = name;
+			TaskView.ItemsSource = todo_list.tasks;
 		}
 
 		async void Create_task(object sender, EventArgs e)
 		{
 			string result = await DisplayPromptAsync("New Task", "Task Name");
+			
 			if (result != null)
 			{
-				tasks.Add(new TodoTask(result));
+				todo_list.tasks.Add(new NameList { item_name = result });
+				string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), todo_name);
+				string jsonString = JsonSerializer.Serialize<TodoTask>(todo_list);
+				File.WriteAllText(fileName, jsonString);
 			}
 		}
 	}

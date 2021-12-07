@@ -3,7 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ToDo.MainPage">
 	<AbsoluteLayout>
-		<ImageButton
+        <StackLayout>
+            <ListView x:Name="TodoList"
+				ItemsSource="{Binding fileNames}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Button Text="{Binding item_name}"  BackgroundColor="Transparent" TextTransform="None" TextColor="#0073ff"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        <ImageButton
                 AbsoluteLayout.LayoutBounds="0.95,0.95,60,60"
                 AbsoluteLayout.LayoutFlags="PositionProportional"
                 CornerRadius="90"

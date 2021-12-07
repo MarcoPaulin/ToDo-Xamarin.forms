@@ -5,11 +5,11 @@
 	<AbsoluteLayout>
 		<StackLayout Margin="20">
 			<ListView x:Name="TaskView"
-				ItemsSource="{Binding tasks}">
+				ItemsSource="{Binding todo_list.tasks}">
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<ViewCell>
-							<input:CheckBox Text="{Binding Name}" Type="Check" Color="#0073ff" BorderColor="#0073ff" IconColor="#0073ff"/>
+                            <input:CheckBox Text="{Binding item_name}" Type="Check" Color="#0073ff" BorderColor="#0073ff" IconColor="#0073ff"/>
 						</ViewCell>
 					</DataTemplate>
 				</ListView.ItemTemplate>

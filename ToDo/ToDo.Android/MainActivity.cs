@@ -4,6 +4,7 @@ using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using System.IO;
 
 namespace ToDo.Droid
 {
@@ -17,6 +18,13 @@ namespace ToDo.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+/*            string documents = Directory.GetCurrentDirectory();
+            string directory_name = Path.Combine(documents, "Files");
+
+            if (!Directory.Exists(directory_name))
+            {
+                Directory.CreateDirectory(directory_name);
+            }*/
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
