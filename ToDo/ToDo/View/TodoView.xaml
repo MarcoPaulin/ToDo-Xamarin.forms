@@ -1,28 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
-			 x:Class="ToDo.View.TodoView">
-	<AbsoluteLayout>
-		<StackLayout Margin="20">
-			<ListView x:Name="TaskView"
+			 x:Class="ToDo.View.TodoView"
+             >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="deleteButton" Order="Primary" Icon="delete.png" Text="Item 1" Priority="0" Clicked="DeleteFile" />
+        <ToolbarItem Name="addButton" Order="Primary" Icon="add.png" Text="Item 2" Priority="0" Clicked="CreateTask" />
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <StackLayout Margin="10">
+            <ListView x:Name="TaskView"
 				ItemsSource="{Binding todo_list.tasks}">
-				<ListView.ItemTemplate>
-					<DataTemplate>
-						<ViewCell>
-                            <input:CheckBox Text="{Binding item_name}" Type="Check" Color="#0073ff" BorderColor="#0073ff" IconColor="#0073ff"/>
-						</ViewCell>
-					</DataTemplate>
-				</ListView.ItemTemplate>
-			</ListView>
-		</StackLayout>
-		<ImageButton
-				AbsoluteLayout.LayoutBounds="0.95,0.95,60,60"
-				AbsoluteLayout.LayoutFlags="PositionProportional"
-				CornerRadius="90"
-				BackgroundColor="#0073ff"
-				Clicked="Create_task"
-				Source="add.png"/>
-		
-	</AbsoluteLayout>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <input:CheckBox Grid.Column="0" Text="{Binding item_name}" Type="Check"  Color="#0073ff" IsChecked="{Binding item_status}" CheckChanged="OnChange"  BorderColor="#0073ff" IconColor="#0073ff"/>
+                                <ImageButton Grid.Column="3"  CornerRadius="90"  BackgroundColor="Transparent" Source="delete2.png" Clicked="DeleteTask"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </Grid>
 
 </ContentPage>

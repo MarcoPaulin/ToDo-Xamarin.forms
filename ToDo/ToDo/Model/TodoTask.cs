@@ -7,6 +7,10 @@ namespace ToDo.Model
 {
 	public class TodoTask
 	{
-		public ObservableCollection<NameList> tasks = new ObservableCollection<NameList>();
+		public ObservableCollection<TaskModel> tasks { get; set; }
+		public TodoTask()
+        {
+			tasks = new ObservableCollection<TaskModel>();
+        }
 	}
 }

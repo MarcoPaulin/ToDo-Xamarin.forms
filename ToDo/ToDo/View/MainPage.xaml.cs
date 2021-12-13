@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using ToDo.Model;
 using ToDo.View;
@@ -18,25 +19,45 @@ namespace ToDo
 		public MainPage()
 		{
 			InitializeComponent();
-			string[] filePaths = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "*.json");
-			RecoverFileName(filePaths);
+			RecoverFileName();
 			TodoList.ItemsSource = fileNames;
 		}
 
-		void RecoverFileName(string[] filePaths)
+		protected override void OnAppearing()
+		{
+            RecoverFileName();
+            TodoList.ItemsSource = fileNames;
+        }
+
+        void RecoverFileName()
         {
+			string[] filePaths = Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "*.json");
+			fileNames.Clear();
 			foreach (string filePath in filePaths)
             {
-				string[] split_path = filePath.Split('/');
-				string test = split_path.Last();
-				fileNames.Add(new NameList { item_name = split_path.Last() });
+				string[] splitPath = filePath.Split('/');
+				fileNames.Add(new NameList { item_name = splitPath.Last().Split('.')[0]});
 			}
         } 
 
-		async void Create_Todo(object sender, EventArgs e)
+		async void CreateTodo(object sender, EventArgs e)
 		{
-			string result = await DisplayPromptAsync("New Todo", "Todo Name") + ".json";
-			await Navigation.PushAsync(new TodoView(result));
+			string result = await DisplayPromptAsync("New Todo", "Todo Name");
+			if (result != null)
+			{
+				await Navigation.PushAsync(new TodoView(result));
+				RecoverFileName();
+			}
 		}
+
+		async void ButtonClicked(object sender, EventArgs e)
+        {
+			Button button = (Button)sender;
+			string fileName = button.Text + ".json";
+			string jsonString = File.ReadAllText(Path.Combine(Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), fileName)));
+			TodoTask todoConfig = JsonSerializer.Deserialize<TodoTask>(jsonString);
+			await Navigation.PushAsync(new TodoView(button.Text, todoConfig));
+		}
+
 	}
 }

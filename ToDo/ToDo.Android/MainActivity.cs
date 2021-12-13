@@ -5,6 +5,8 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using System.IO;
+using Android.Views;
+using Android.Content.Res;
 
 namespace ToDo.Droid
 {
